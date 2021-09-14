@@ -17,7 +17,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	
 	
 	
-	//configuration을 읽어서 SecurityConfig가 읽어서 등록될 때 @Bean을 읽어서 return을 해서 IOC가 new BCryptPasswordEncoder()를 들고 있는다.
+	//configuration을 읽어서 SecurityConfig가 등록될 때 @Bean을 읽어서 return을 해서 IOC가 new BCryptPasswordEncoder()를 들고 있는다.
 	@Bean
 	public BCryptPasswordEncoder encoder() {
 		return new BCryptPasswordEncoder();

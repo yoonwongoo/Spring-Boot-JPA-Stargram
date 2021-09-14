@@ -1,13 +1,22 @@
 package com.yoon.stargram.web;
 
+import java.util.HashMap;
+import java.util.Map;
+
+import javax.validation.Valid;
+
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.validation.BindingResult;
+import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.yoon.stargram.domain.user.User;
+import com.yoon.stargram.handler.ex.CustomValidationException;
 import com.yoon.stargram.service.AuthService;
 import com.yoon.stargram.web.dto.SignUpDto;
 
@@ -41,13 +50,36 @@ public class AuthController {
 
 	
 	@PostMapping("/auth/signup")
-	public String signUp(SignUpDto signUpDto) { 
+	public  String signUp(@Valid SignUpDto signUpDto, BindingResult bindingResult) { 
 		
-		User user = signUpDto.toEntity();
+		if(bindingResult.hasErrors()) {
+			Map<String, String> errorMap = new HashMap<>();
 		
-		authService.join(user);
+			for(FieldError error : bindingResult.getFieldErrors()) {
+				
+				errorMap.put(error.getField(), error.getDefaultMessage());
+				
+				System.out.println("======================================");
+				System.out.println(error.getDefaultMessage());
+				System.out.println(error.getField());
+				System.out.println("======================================");
+				
+			}
+				throw new CustomValidationException("유효성 검사 실패입니다.",errorMap);
+			
+			}else{
+				
+			User user = signUpDto.toEntity();
+			
+			authService.join(user);
+			
 		
-		log.info("회원가입 signUp메서드작동");
-		return "auth/signin";
+			return "auth/signin";
+			
+			
+		}
+	
+		
+		
 	}
 }

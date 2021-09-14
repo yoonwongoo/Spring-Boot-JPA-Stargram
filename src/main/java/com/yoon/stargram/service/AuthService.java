@@ -29,8 +29,8 @@ public class AuthService {
 	@Transactional 
 	public User join(User user) throws RuntimeException{
 
-		String afterPw = bcryEncoder.encode(user.getPassword());
-		user.setPassword(afterPw);
+		String encPw = bcryEncoder.encode(user.getPassword());
+		user.setPassword(encPw);
 		user.setRole("ROLE_USER");
 		User userEntity = userRepository.save(user); //save함수는 파라미터로 받은 객체 그 객체의 타입을 반환한다.
 		
