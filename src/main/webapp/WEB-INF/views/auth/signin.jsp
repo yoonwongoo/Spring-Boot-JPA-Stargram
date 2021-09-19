@@ -24,7 +24,7 @@
                         <h1><img src="/images/stargram.png" alt=""></h1>
                         
                         <!--로그인 인풋-->
-                        <form class="login__input" >
+                        <form class="login__input" action="/auth/signin" method="post">
                             <input type="text" name="username" placeholder="유저네임" required="required" />
                             <input type="password" name="password" placeholder="비밀번호" required="required" />
                             <button>로그인</button>
@@ -62,4 +62,14 @@
     </div>
 </body>
 
+<script>
+var msg = '${msg}';
+
+
+if(msg == 'success'){
+	
+	alert("회원가입이 완료되었습니다.");
+}
+
+</script>
 </html>

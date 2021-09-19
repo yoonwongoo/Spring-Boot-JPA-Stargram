@@ -1,5 +1,7 @@
 package com.yoon.stargram.util;
 
+
+
 public class Script {
 	
 	public static String back(String message) {
@@ -15,5 +17,7 @@ public class Script {
 		
 		return sb.toString();
 	}
-
+	
+	
+	
 }

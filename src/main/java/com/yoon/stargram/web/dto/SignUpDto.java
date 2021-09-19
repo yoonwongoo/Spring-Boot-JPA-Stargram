@@ -1,6 +1,6 @@
 package com.yoon.stargram.web.dto;
 
-import javax.validation.constraints.Max;
+
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
 
@@ -20,6 +20,7 @@ public class SignUpDto {
 	private String password;
 	@NotBlank
 	private String email;
+	@Size(min = 0, max=20)
 	@NotBlank
 	private String name;
 	

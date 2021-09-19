@@ -9,11 +9,13 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yoon.stargram.domain.user.User;
 import com.yoon.stargram.handler.ex.CustomValidationException;
@@ -50,7 +52,7 @@ public class AuthController {
 
 	
 	@PostMapping("/auth/signup")
-	public  String signUp(@Valid SignUpDto signUpDto, BindingResult bindingResult) { 
+	public  String signUp(@Valid SignUpDto signUpDto, BindingResult bindingResult, RedirectAttributes rttr) { 
 		
 		if(bindingResult.hasErrors()) {
 			Map<String, String> errorMap = new HashMap<>();
@@ -65,21 +67,25 @@ public class AuthController {
 				System.out.println("======================================");
 				
 			}
-				throw new CustomValidationException("유효성 검사 실패입니다.",errorMap);
+				throw new CustomValidationException("유효성 검사 실패입니다.", errorMap);
 			
 			}else{
 				
 			User user = signUpDto.toEntity();
-			
+		
+	
 			authService.join(user);
 			
+			rttr.addFlashAttribute("msg","success");
 		
-			return "auth/signin";
 			
+			
+			return "redirect:/auth/signin";
 			
 		}
 	
 		
 		
 	}
+	
 }

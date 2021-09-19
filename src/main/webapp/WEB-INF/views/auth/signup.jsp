@@ -1,9 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
+
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stargram</title>
@@ -27,10 +29,10 @@
                          
                          <!--회원가입 인풋-->
                         <form class="login__input" action="/auth/signup" method="post" >
-                            <input type="text" name="username" placeholder="유저네임" required="required" maxlength =24/>
+                            <input type="text" name="username" placeholder="유저네임" required="required" />
                             <input type="password" name="password" placeholder="패스워드" required="required" maxlength =200/>
                             <input type="email" name="email" placeholder="이메일" required="required" maxlength =50/>
-                            <input type="text" name="name" placeholder="이름" required="required" maxlength =20/>
+                            <input type="text" name="name" placeholder="이름" required="required" />
                             <button>가입</button>
                         </form>
                         <!--회원가입 인풋end-->
@@ -49,5 +51,11 @@
         </main>
     </div>
 </body>
+
+<script>
+	
+
+
+</script>
 
 </html>

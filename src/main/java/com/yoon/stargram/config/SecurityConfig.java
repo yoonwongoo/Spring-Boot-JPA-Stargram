@@ -29,14 +29,16 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 	protected void configure(HttpSecurity http) throws Exception {
 		// TODO Auto-generated method stub
 		//super.configure(http);// 이 메서드 때문에 로그인폼이 계속 뜨는거임.
+		http.csrf().disable(); 
 		http.authorizeRequests() //HttpServletRequest를 이용한다.
 			.antMatchers("/", "/user/**", "/image/**", "/subscribe/**","/comment/**").authenticated()//인증이 필요하다.antMachers는 특정경로지정.
 			.anyRequest().permitAll()
 			.and()
 			.formLogin()
-			.loginPage("/auth/signin")
+			.loginPage("/auth/signin")//get
+			.loginProcessingUrl("/auth/signin")//post요청이 들어오면 스프링시큐리티가 로그인 진행.
 			.defaultSuccessUrl("/");
-		http.csrf().disable();
+		
 
 	}
 
