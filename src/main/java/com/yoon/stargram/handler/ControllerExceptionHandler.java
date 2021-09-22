@@ -20,7 +20,7 @@ public class ControllerExceptionHandler {
 	@ExceptionHandler(CustomValidationException.class)
 	public String validationExcepion(CustomValidationException e) {
 	
-	return Script.back(e.getErrorMap().toString());
+	return e.getErrorMap().toString();
 	
 
 	}
