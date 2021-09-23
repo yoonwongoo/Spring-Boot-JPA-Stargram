@@ -22,12 +22,12 @@
 			<!--프로필셋팅 아이디영역end-->
 
 			<!--프로필 수정-->
-			<form id="profileUpdate"">
+			<form id="profileUpdate" onsubmit="update(${principal.user.id}, event)">
 				<div class="content-item__02">
 					<div class="item__title">이름</div>
 					<div class="item__input">
 						<input type="text" name="name" placeholder="이름"
-							value="${principal.user.name}" />
+							value="${principal.user.name}"  />
 					</div>
 				</div>
 				<div class="content-item__03">
@@ -40,12 +40,13 @@
 				<div class="content-item__04">
 					<div class="item__title">패스워드</div>
 					<div class="item__input">
-						<input type="password" name="password" placeholder="패스워드" readonly="readonly"  />
+						<input type="password" name="password" placeholder="패스워드" 
+						value="${principal.user.password}" />
 					</div>
 				</div>
 				<div class="content-item__05">
 					<div class="item__title">웹사이트</div>
-					<div class="item__input">s
+					<div class="item__input">
 						<input type="text" name="website" placeholder="웹 사이트"
 							value="${principal.user.website}" />
 					</div>
@@ -88,7 +89,7 @@
 				<div class="content-item__11">
 					<div class="item__title"></div>
 					<div class="item__input">
-						<button  onclick="update(${principal.user.id})">회원수정완료</button>
+						<button>회원수정완료</button>
 					</div>
 				</div>
 				<!--제출버튼end-->
