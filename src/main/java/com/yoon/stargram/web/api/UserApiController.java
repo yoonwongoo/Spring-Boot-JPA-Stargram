@@ -49,7 +49,7 @@ public class UserApiController {
 				System.out.println("======================================");
 				
 			}
-				throw new CustomValidationApiException("유효성 검사 실패입니다.", errorMap);
+				throw new CustomValidationApiException("이름과 패스워드는 빈칸 일 수 없습니다", errorMap);
 		}
 		else {
 		
