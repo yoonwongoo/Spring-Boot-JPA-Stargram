@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yoon.stargram.handler.ex.CustomApiException;
 import com.yoon.stargram.handler.ex.CustomValidationApiException;
 import com.yoon.stargram.handler.ex.CustomValidationException;
 import com.yoon.stargram.util.Script;
@@ -39,4 +40,11 @@ public class ControllerExceptionHandler {
 	
 
 	}
+	@ExceptionHandler(CustomApiException.class)
+	public ResponseEntity<?> apiExcepion(CustomApiException e) {
+	
+	return new ResponseEntity<>(new CMRespDto<>(-1, e.getMessage(), null), HttpStatus.BAD_REQUEST);
+	
+	
+}
 }
