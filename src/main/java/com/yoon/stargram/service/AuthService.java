@@ -9,6 +9,8 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.yoon.stargram.domain.user.User;
 import com.yoon.stargram.domain.user.UserRepository;
+import com.yoon.stargram.handler.ex.CustomValidationException;
+import com.yoon.stargram.handler.ex.SignUpTestException;
 import com.yoon.stargram.web.AuthController;
 
 
@@ -28,15 +30,20 @@ public class AuthService {
 	
 	@Transactional 
 	public User join(User user) throws RuntimeException{
-
-		String encPw = bcryEncoder.encode(user.getPassword());
-		user.setPassword(encPw);
-		user.setRole("ROLE_USER");
-		User userEntity = userRepository.save(user); //save함수는 파라미터로 받은 객체 그 객체의 타입을 반환한다.
+		try {
+			String encPw = bcryEncoder.encode(user.getPassword()); 
+			user.setPassword(encPw);
+			user.setRole("ROLE_USER");
+			User userEntity = userRepository.save(user); //save함수는 파라미터로 받은 객체 그 객체의 타입을 반환한다.
+			
+			log.info(user.toString());
+			
+			return userEntity;
+			
+		} catch (Exception e) {
+			throw new CustomValidationException("이미 가입된 아이디입니다.");
+		}
 		
-		log.info(user.toString());
-		
-		return userEntity;
 		
 	}
 

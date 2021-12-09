@@ -8,13 +8,12 @@ public interface SubscribeRepository extends JpaRepository<Subscribe, Integer> {
 	
 	
 	
-	@Modifying//insert, update, delete를 할 경우에 .
+	@Modifying//insert, update, delete를 할 경우에 네이티브 쿼리로 할 경우에는 해당 어노테이션 필요
 	@Query(value="INSERT INTO subscribe(fromUserId, toUserId, createDate) VALUES (:fromUserId, :toUserId, now())", nativeQuery = true)
-	void subscribe(int fromUserId, int toUserId);//1 , -1 변경된 튜플만큼 리턴, -1은 오류
+	void subscribe(int fromUserId, int toUserId);
 	
 	
 	@Modifying
 	@Query(value="DELETE FROM subscribe WHERE fromUserId = :fromUserId AND toUserId = :toUserId",  nativeQuery = true)
-	void unsubscribe(int fromUserId, int toUserId);//1, -1
-
+	void unsubscribe(int fromUserId, int toUserId);
 }

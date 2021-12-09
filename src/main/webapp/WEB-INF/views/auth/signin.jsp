@@ -62,14 +62,4 @@
     </div>
 </body>
 
-<script>
-var msg = '${msg}';
-
-
-if(msg == 'success'){
-	
-	alert("회원가입이 완료되었습니다.");
-}
-
-</script>
 </html>

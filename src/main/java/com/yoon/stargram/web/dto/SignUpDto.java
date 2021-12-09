@@ -1,4 +1,4 @@
-package com.yoon.stargram.web.dto;
+ package com.yoon.stargram.web.dto;
 
 
 import javax.validation.constraints.Email;
@@ -26,7 +26,7 @@ public class SignUpDto {
 	private String email;
 	
 	@Size(min = 0, max=20)
-	@NotBlank(message="이름을 입력해주세요")
+	@NotBlank(message="이름을 입력해주세요") 
 	private String name;
 	
 	

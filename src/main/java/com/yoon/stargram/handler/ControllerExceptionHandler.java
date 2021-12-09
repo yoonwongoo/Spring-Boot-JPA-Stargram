@@ -13,12 +13,13 @@ import org.springframework.web.bind.annotation.RestController;
 import com.yoon.stargram.handler.ex.CustomApiException;
 import com.yoon.stargram.handler.ex.CustomValidationApiException;
 import com.yoon.stargram.handler.ex.CustomValidationException;
+import com.yoon.stargram.handler.ex.SignUpTestException;
 import com.yoon.stargram.util.Script;
 import com.yoon.stargram.web.dto.CMRespDto;
 
 
 @RestController
-@ControllerAdvice//exception 다 낚아챔.
+@ControllerAdvice//exception 다 낚아챔. 
 public class ControllerExceptionHandler {
 	
 	/*
@@ -27,8 +28,14 @@ public class ControllerExceptionHandler {
 	 * */
 	@ExceptionHandler(CustomValidationException.class)
 	public String validationExcepion(CustomValidationException e) {
+		
+		if(e.getErrorMap()!= null) {
+			return Script.back(e.getErrorMap().toString());  
+		}else {
+			return Script.back(e.getMessage());
+		} 
 	
-	return Script.back(e.getErrorMap().toString());  
+	
 	
 
 	}
@@ -47,4 +54,6 @@ public class ControllerExceptionHandler {
 	
 	
 }
-}
+
+
+	}

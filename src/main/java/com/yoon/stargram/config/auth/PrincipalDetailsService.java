@@ -31,8 +31,8 @@ public class PrincipalDetailsService implements UserDetailsService{
 		}else {
 			
 			PrincipalDetails principal = new PrincipalDetails(userEntity);
-	
-			System.out.println(principal.getUser());
+			
+		
 			return new PrincipalDetails(userEntity);
 		}
 		

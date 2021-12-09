@@ -1,13 +1,19 @@
 package com.yoon.stargram.domain.user;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
+
+import com.yoon.stargram.domain.iamge.Image;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -47,6 +53,11 @@ public class User {
 	private String gender;
 	
 	private String profileImageUrl;//작성자 사진.
+	
+	
+	@OneToMany(mappedBy ="user", fetch = FetchType.LAZY)
+	private List<Image> images = new ArrayList<>();
+	
 	
 	
 	private String role;//권한

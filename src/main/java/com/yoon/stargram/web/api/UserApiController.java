@@ -42,11 +42,7 @@ public class UserApiController {
 			for(FieldError error : bindingResult.getFieldErrors()) {
 				
 				errorMap.put(error.getField(), error.getDefaultMessage());
-				
-				System.out.println("======================================");
-				System.out.println(error.getDefaultMessage());
-				System.out.println(error.getField());
-				System.out.println("======================================");
+			
 				
 			}
 				throw new CustomValidationApiException("이름과 패스워드는 빈칸 일 수 없습니다", errorMap);
@@ -54,7 +50,7 @@ public class UserApiController {
 		else {
 		
 		User userEntity = userService.userUpdate(id, userUpdateDto.toEntity());
-		System.out.println(userEntity+"컨트롤러");
+
 		principalDetails.setUser(userEntity);//여기서 세션정보변경 서비스에서 컨트롤러로 넘어올때 트랙잭션 커밋되지만 세션은 안바뀜.
 		
 		

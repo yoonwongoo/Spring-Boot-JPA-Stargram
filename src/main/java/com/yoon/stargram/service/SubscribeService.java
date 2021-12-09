@@ -1,4 +1,4 @@
-package com.yoon.stargram.service;
+ package com.yoon.stargram.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -24,7 +24,7 @@ public class SubscribeService {
 		
 		try {
 			subscribeRepository.subscribe(fromUserId, toUserId);
-			
+			//try 하다가 터질 시 알아서 예외터져서 알아서 진행.
 		} catch (Exception e) {
 			throw new CustomApiException("이미 구독하셨습니다");
 		}

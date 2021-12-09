@@ -1,5 +1,6 @@
-package com.yoon.stargram.config.auth;
+ package com.yoon.stargram.config.auth;
 
+import java.util.ArrayList;
 import java.util.Collection;
 
 import org.springframework.security.core.GrantedAuthority;
@@ -28,8 +29,9 @@ public class PrincipalDetails implements UserDetails {
 
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		// TODO Auto-generated method stub
-		return null;
+	Collection<GrantedAuthority> collector = new ArrayList<GrantedAuthority>();
+	collector.add(()-> {return user.getRole();} );
+		return collector;
 	}
 
 	@Override

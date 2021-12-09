@@ -8,6 +8,7 @@ import javax.validation.Valid;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Controller;
 
 import org.springframework.validation.BindingResult;
@@ -19,10 +20,11 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import com.yoon.stargram.domain.user.User;
 import com.yoon.stargram.handler.ex.CustomValidationException;
+import com.yoon.stargram.handler.ex.SignUpTestException;
 import com.yoon.stargram.service.AuthService;
 import com.yoon.stargram.web.dto.SignUpDto;
 
-@Controller
+@Controller//ioc등록 및 html파일을 리턴하는 컨트롤러.
 public class AuthController {
 
 	@Autowired
@@ -51,8 +53,8 @@ public class AuthController {
 	}
 
 	
-	@PostMapping("/auth/signup")
-	public  String signUp(@Valid SignUpDto signUpDto, BindingResult bindingResult, RedirectAttributes rttr) { 
+ 	@PostMapping("/auth/signup")
+	public  String signUp(@Valid SignUpDto signUpDto, BindingResult bindingResult) { 
 		
 		if(bindingResult.hasErrors()) {
 			Map<String, String> errorMap = new HashMap<>();
@@ -61,25 +63,16 @@ public class AuthController {
 				
 				errorMap.put(error.getField(), error.getDefaultMessage());
 				
-				System.out.println("======================================");
-				System.out.println(error.getDefaultMessage());
-				System.out.println(error.getField());
-				System.out.println("======================================");
-				
+		
 			}
-				throw new CustomValidationException("유효성 검사 실패입니다.", errorMap);
+			throw new CustomValidationException("유효성 검사 실패입니다.", errorMap);  
 			
 			}else{
-				
-			User user = signUpDto.toEntity();
-		
+			
+					User user = signUpDto.toEntity();
+					authService.join(user);
 	
-			authService.join(user);
-			
-			rttr.addFlashAttribute("msg","success");
-		
-			
-			
+	
 			return "redirect:/auth/signin";
 			
 		}
