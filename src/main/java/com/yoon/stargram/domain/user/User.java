@@ -13,6 +13,7 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.PrePersist;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.yoon.stargram.domain.iamge.Image;
 
 import lombok.AllArgsConstructor;
@@ -56,6 +57,7 @@ public class User {
 	
 	
 	@OneToMany(mappedBy ="user", fetch = FetchType.LAZY)
+	@JsonIgnoreProperties({"user"})
 	private List<Image> images = new ArrayList<>();
 	
 	

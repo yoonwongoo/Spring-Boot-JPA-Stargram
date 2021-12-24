@@ -8,6 +8,7 @@ import java.util.UUID;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.yoon.stargram.config.auth.PrincipalDetails;
 import com.yoon.stargram.domain.iamge.Image;
@@ -33,7 +34,7 @@ public class ImageService {
 
 	
 	
-	
+	@Transactional
 	public void ImageUpload(ImageUploadDto imageUploadDto, PrincipalDetails principalDetails ) {//사진업로드
 		if(imageUploadDto.getFile().isEmpty()) {
 			
@@ -59,7 +60,7 @@ public class ImageService {
 	
 	Image image =imageUploadDto.toEntity(imageFileName, principalDetails.getUser());
 	
-	Image imageEntity = imageRepository.save(image); //save함수는 리턴을 T로 되니까 imageEntity가 들고 있는다.
+	 imageRepository.save(image); //save함수는 리턴을 T로 되니까 imageEntity가 들고 있는다.
 	
 	}
 

@@ -3,7 +3,6 @@ package com.yoon.stargram.domain.iamge;
 import java.time.LocalDateTime;
 
 import javax.persistence.Entity;
-
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
@@ -56,4 +55,16 @@ public class Image {
 		this.createDate=LocalDateTime.now();
 		
 	}
+
+	// 오브젝트를 출력할 때 무한참조 방지
+	@Override
+	public String toString() {
+		return "Image [id=" + id + ", caption=" + caption + ", postImageUrl=" + postImageUrl + ", createDate="
+				+ createDate + "]";
+	} //원래 @data 하면 toString()까지 만들어준다 
+	
+	
+	
+	
+	
 }
